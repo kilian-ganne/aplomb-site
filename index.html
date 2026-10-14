@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Aplomb, la planche d'équilibre connectée pour travailler proprioception, mobilité et renforcement du bas du corps, en sécurité et en jouant.">
+<meta property="og:title" content="Aplomb : des appuis solides, sans s'ennuyer">
+<meta property="og:description" content="Planche d'équilibre connectée. Prototype en test à Lyon.">
+<meta property="og:image" content="https://aplomb-sport.fr/assets/planche.png">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<title>Aplomb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout : une colonne éditoriale large, sections alternant crème et noir, comme les visuels réseaux. */
+:root {
+  --bg: #F5F3EF;
+  --surface: #FFFFFF;
+  --line: #E2DED7;
+  --fg: #141414;
+  --muted: #5A554E;
+  --wood: #B8865B;
+  --wood-dark: #8A5A33;
+  --wood-light: #C9976A;
+  --ink: #141414;
+  --ink-fg: #F5F3EF;
+  --ink-muted: #CFC9BF;
+  --display: 'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+  --wrap: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161514; --surface: #201F1D; --line: #34312D; --fg: #F2EFEA; --muted: #B5AFA6;
+    --wood-dark: #D9A97A; --ink: #0C0C0B; --ink-fg: #F5F3EF; --ink-muted: #CFC9BF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161514; --surface: #201F1D; --line: #34312D; --fg: #F2EFEA; --muted: #B5AFA6;
+  --wood-dark: #D9A97A; --ink: #0C0C0B; --ink-fg: #F5F3EF; --ink-muted: #CFC9BF; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--wood); outline-offset: 3px; }
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding-inline: 24px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.02; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--wood-dark); }
+.dark .eyebrow { color: var(--wood-light); }
+section { padding-block: 96px; }
+.dark { background: var(--ink); color: var(--ink-fg); }
+.dark .muted { color: var(--ink-muted); }
+.muted { color: var(--muted); }
+.source { font-size: 13px; color: var(--muted); }
+.dark .source { color: var(--ink-muted); }
+
+/* Logo */
+.logo { display: inline-flex; align-items: center; gap: 2px; font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.01em; text-decoration: none; }
+.logo svg { width: 0.86em; height: 0.86em; }
+
+/* Header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.top nav { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 500; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { color: var(--wood-dark); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 24px; border-radius: 999px; font-family: var(--body); font-weight: 600; font-size: 16px; text-decoration: none; border: 2px solid transparent; transition: transform .15s ease, background .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-wood { background: var(--wood); color: #141414; }
+.btn-wood:hover { background: var(--wood-light); }
+.btn-line { border-color: currentColor; }
+.top .btn { min-height: 42px; padding: 8px 18px; font-size: 15px; }
+@media (max-width: 760px) { .top nav .navlink { display: none; } }
+
+/* Hero */
+.hero { padding-block: 72px 56px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7vw, 88px); margin-block: 18px 22px; }
+.hero h1 em { font-style: normal; color: var(--wood-dark); }
+.hero .lead { font-size: 20px; max-width: 34ch; color: var(--muted); }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero figure { margin: 0; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+
+/* Problème */
+.stat-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: end; margin-top: 40px; }
+.big { font-family: var(--display); font-weight: 800; font-size: clamp(96px, 16vw, 200px); line-height: 0.82; letter-spacing: -0.05em; color: var(--wood-light); }
+.stat-grid h2 { font-size: clamp(30px, 4vw, 46px); margin-top: 20px; }
+.reasons { display: grid; gap: 14px; }
+.reason { display: flex; gap: 18px; align-items: baseline; padding-block: 16px; border-top: 1px solid #3A3835; font-size: 19px; }
+.reason b { font-family: var(--display); color: var(--wood-light); font-size: 22px; min-width: 22px; }
+.callout { margin-top: 56px; padding: 32px; border-radius: 24px; background: var(--wood); color: #141414; display: grid; gap: 8px; }
+.callout p { font-size: clamp(20px, 2.4vw, 26px); font-weight: 600; line-height: 1.35; }
+.callout .source { color: #2D2A26; }
+@media (max-width: 860px) { .stat-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* Produit */
+.section-head { display: grid; gap: 16px; max-width: 760px; }
+.section-head h2 { font-size: clamp(36px, 5vw, 60px); }
+.section-head p { font-size: 19px; color: var(--muted); }
+.parts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 48px; }
+.part { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; }
+.part .n { width: 34px; height: 34px; border-radius: 50%; background: var(--fg); color: var(--bg); display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 16px; }
+.part h3 { font-size: 21px; letter-spacing: -0.01em; }
+.part p { font-size: 15px; color: var(--muted); }
+@media (max-width: 900px) { .parts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .parts { grid-template-columns: 1fr; } }
+
+.levels { margin-top: 64px; display: grid; gap: 20px; }
+.levels h3 { font-size: 26px; }
+.level-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.level { display: grid; gap: 10px; }
+.level .bar { border-radius: 99px; }
+.level b { font-family: var(--display); font-size: 18px; }
+.level span { font-size: 14px; color: var(--muted); }
+@media (max-width: 640px) { .level-row { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; } }
+
+/* Appli */
+.app-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 48px; }
+.app-card { border: 1px solid #34322F; border-radius: 20px; padding: 28px; display: grid; gap: 12px; align-content: start; }
+.app-card svg { width: 40px; height: 40px; }
+.app-card h3 { font-size: 24px; }
+.app-card p { color: var(--ink-muted); font-size: 16px; }
+.dark .section-head p { color: var(--ink-muted); }
+@media (max-width: 860px) { .app-grid { grid-template-columns: 1fr; } }
+
+/* Histoire */
+.story { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
+.story h2 { font-size: clamp(34px, 4.6vw, 54px); }
+.story-text { display: grid; gap: 18px; font-size: 18px; max-width: 62ch; }
+.chain { display: grid; gap: 0; margin-top: 8px; }
+.chain div { padding: 14px 0 14px 22px; border-left: 3px solid var(--wood); font-weight: 600; }
+.chain div:last-child { border-left-color: var(--fg); }
+@media (max-width: 860px) { .story { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Testeur */
+.cta-band { background: var(--wood); color: #141414; }
+.cta-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.cta-band h2 { font-size: clamp(38px, 5.5vw, 68px); }
+.cta-band p { font-size: 19px; margin-top: 16px; max-width: 46ch; }
+.contact-box { background: #141414; color: #F5F3EF; border-radius: 24px; padding: 32px; display: grid; gap: 18px; }
+.contact-box .btn-wood { width: 100%; }
+.contact-line { display: grid; gap: 2px; }
+.contact-line small { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #CFC9BF; }
+.contact-line a, .contact-line span { font-size: 18px; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.contact-line a:hover { color: #C9976A; }
+@media (max-width: 860px) { .cta-grid { grid-template-columns: 1fr; } }
+
+/* Footer */
+footer { padding-block: 48px; font-size: 14px; color: var(--muted); }
+footer .wrap { display: grid; gap: 24px; }
+.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+details summary { cursor: pointer; font-weight: 600; color: var(--fg); }
+details p { margin-top: 10px; max-width: 70ch; }
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="Aplomb, accueil">APL<svg viewBox="0 0 172 172" aria-hidden="true"><circle cx="86" cy="86" r="86" fill="#141414"/><circle cx="86" cy="86" r="50" fill="none" stroke="#F5F3EF" stroke-width="10"/><path d="M14 86 H30 M142 86 H158" stroke="#F5F3EF" stroke-width="10" stroke-linecap="round"/><circle cx="86" cy="86" r="20" fill="#E2B98F"/></svg>MB</a>
+    <nav aria-label="Navigation principale">
+      <a class="navlink" href="#probleme">Le problème</a>
+      <a class="navlink" href="#produit">La planche</a>
+      <a class="navlink" href="#appli">L'appli</a>
+      <a class="btn btn-wood" href="#testeur">Deviens testeur</a>
+    </nav>
+  </div>
+</header>
+
+<main id="accueil">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Planche d'équilibre connectée</div>
+        <h1>Des appuis solides, <em>sans s'ennuyer.</em></h1>
+        <p class="lead">Proprioception, mobilité et renforcement du bas du corps. En sécurité, à ton niveau, en jouant.</p>
+        <div class="actions">
+          <a class="btn btn-wood" href="#testeur">Deviens testeur</a>
+          <a class="btn btn-line" href="https://www.instagram.com/aplomb.sport/" target="_blank" rel="noopener">Suivre @aplomb.sport</a>
+        </div>
+      </div>
+      <figure>
+        <img src="assets/planche.png" width="1200" height="550" alt="La planche Aplomb : un plateau en bois retenu par des élastiques au-dessus d'une base">
+      </figure>
+    </div>
+  </section>
+
+  <section class="dark" id="probleme">
+    <div class="wrap">
+      <div class="eyebrow">Le problème</div>
+      <div class="stat-grid">
+        <div>
+          <div class="big" aria-hidden="true">÷3</div>
+          <h2>Le renforcement musculaire divise par 3 le risque de blessure sportive.</h2>
+          <p class="source" style="margin-top:14px">Méta-analyse, Lauersen et al., British Journal of Sports Medicine, 2018.</p>
+        </div>
+        <div class="reasons">
+          <p class="muted" style="font-size:19px">Pourtant, presque personne ne le fait. Pas par manque de connaissances, mais d'envie :</p>
+          <div class="reason"><b>1</b><span>C'est monotone.</span></div>
+          <div class="reason"><b>2</b><span>On ne voit pas ses progrès.</span></div>
+          <div class="reason"><b>3</b><span>Ça passe toujours après la course.</span></div>
+        </div>
+      </div>
+      <div class="callout">
+        <p>Dans une étude sur la prévention des entorses de cheville, seuls 23 % des sportifs ont suivi leur programme de proprioception jusqu'au bout.</p>
+        <span class="source">Hupperets et al., BMJ, 2009.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="produit">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">La planche</div>
+        <h2>Instable, jamais incontrôlable.</h2>
+        <p>Un plateau mobile retenu par des élastiques au-dessus d'une base stable. Tu travailles l'équilibre sans craindre la chute, et un capteur transmet chaque mouvement à l'appli.</p>
+      </div>
+      <div class="parts">
+        <div class="part"><div class="n">1</div><h3>Plateau mobile</h3><p>Surface antidérapante et capteur de mouvement intégré.</p></div>
+        <div class="part"><div class="n">2</div><h3>Élastiques aux 4 coins</h3><p>Interchangeables pour régler la difficulté.</p></div>
+        <div class="part"><div class="n">3</div><h3>Base stable</h3><p>En bois, posée au sol, elle ne bouge pas.</p></div>
+        <div class="part"><div class="n">4</div><h3>Zone d'appui</h3><p>Pour monter, descendre et varier les exercices.</p></div>
+      </div>
+      <div class="levels">
+        <h3>4 élastiques, 4 niveaux</h3>
+        <div class="level-row">
+          <div class="level"><div class="bar" style="height:14px;background:#2F8F55"></div><b>Vert</b><span>Découverte, maintien fort</span></div>
+          <div class="level"><div class="bar" style="height:11px;background:#2B5FA8"></div><b>Bleu</b><span>Progression</span></div>
+          <div class="level"><div class="bar" style="height:8px;background:#C8352B"></div><b>Rouge</b><span>Confirmé</span></div>
+          <div class="level"><div class="bar" style="height:5px;background:var(--fg)"></div><b>Noir</b><span>Athlète, maintien minimal</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="appli">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">L'appli</div>
+        <h2>La séance devient un jeu.</h2>
+        <p>Des programmes construits par des professionnels de la préparation physique, et une progression enfin visible.</p>
+      </div>
+      <div class="app-grid">
+        <div class="app-card">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C9976A" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="#C9976A" stroke-width="3"/><circle cx="20" cy="20" r="3.5" fill="#C9976A"/></svg>
+          <h3>Mini-jeux</h3>
+          <p>Cible, labyrinthe, précision : tu pilotes le jeu avec tes appuis.</p>
+        </div>
+        <div class="app-card">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 32 H34 M6 24 H26 M6 16 H18 M6 8 H12" stroke="#C9976A" stroke-width="3" stroke-linecap="round"/></svg>
+          <h3>Programmes guidés</h3>
+          <p>Mobilité, renforcement, proprioception : chaque séance est calibrée à ton niveau.</p>
+        </div>
+        <div class="app-card">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 30 L14 20 L21 25 L35 10" fill="none" stroke="#C9976A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 10 H35 V18" fill="none" stroke="#C9976A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Suivi de progression</h3>
+          <p>Score de stabilité, historique, comparaison gauche et droite, passage au niveau suivant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="histoire">
+    <div class="wrap story">
+      <div style="display:grid;gap:16px">
+        <div class="eyebrow">Pourquoi Aplomb</div>
+        <h2>Né d'un 100 km de trop.</h2>
+      </div>
+      <div class="story-text">
+        <p>Je suis Kilian, ingénieur du sport et ultra-traileur. Il y a un an, quelques jours avant un 100 km, je me blesse. Comme beaucoup, je faisais très peu de renforcement.</p>
+        <div class="chain">
+          <div>Tendinopathie du tibial antérieur</div>
+          <div>La foulée change, le corps compense</div>
+          <div>Syndrome de l'essuie-glace</div>
+          <div>100 km terminés. Le lendemain, impossible de marcher.</div>
+        </div>
+        <p>Puis des semaines de remise en forme sur une planche d'équilibre, sans objectif ni repère. Aplomb est né de là, avec une mission : aligner renforcement et plaisir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="testeur">
+    <div class="wrap cta-grid">
+      <div>
+        <h2>Le prototype est en test à Lyon.</h2>
+        <p>Coureur, traileur, coach, kiné ou préparateur physique ? Teste Aplomb et aide-nous à le construire.</p>
+      </div>
+      <div class="contact-box">
+        <a class="btn btn-wood" href="https://docs.google.com/forms/d/e/1FAIpQLSdX7hh4hPRhwmiP9ShIh6MxRAAc-g3JyKtBzhUigd1LzfCn5Q/viewform" target="_blank" rel="noopener">Je veux tester Aplomb</a>
+        <div class="contact-line"><small>E-mail</small><a href="mailto:contact@aplomb-sport.fr">contact@aplomb-sport.fr</a></div>
+        <div class="contact-line"><small>Instagram</small><a href="https://www.instagram.com/aplomb.sport/" target="_blank" rel="noopener">@aplomb.sport</a></div>
+        <div class="contact-line"><small>Téléphone</small><span>07 82 32 37 70</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="#accueil" aria-label="Aplomb, retour en haut">APL<svg viewBox="0 0 172 172" aria-hidden="true"><circle cx="86" cy="86" r="86" fill="#141414"/><circle cx="86" cy="86" r="50" fill="none" stroke="#F5F3EF" stroke-width="10"/><path d="M14 86 H30 M142 86 H158" stroke="#F5F3EF" stroke-width="10" stroke-linecap="round"/><circle cx="86" cy="86" r="20" fill="#E2B98F"/></svg>MB</a>
+      <span>© 2026 Aplomb · Lyon</span>
+    </div>
+    <details>
+      <summary>Mentions légales</summary>
+      <p>Éditeur du site : Kilian Ganne, Lyon. Contact : contact@aplomb-sport.fr.<br>Hébergement : GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>Ce site ne dépose pas de cookies et ne collecte aucune donnée personnelle. Le formulaire testeur est géré par un service tiers.</p>
+    </details>
+  </div>
+</footer>
+
+</body>
+</html>
