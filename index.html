@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Aplomb, la planche d'équilibre connectée pour travailler proprioception, mobilité et renforcement du bas du corps, en sécurité et en jouant.">
 <meta property="og:title" content="Aplomb : des appuis solides, sans s'ennuyer">
-<meta property="og:description" content="Planche d'équilibre connectée. Prototype en test à Lyon.">
-<meta property="og:image" content="https://aplomb-sport.fr/assets/planche.png">
+<meta property="og:description" content="Planche d'équilibre connectée, en cours de développement.">
+<meta property="og:image" content="https://aplomb-sport.fr/assets/og.png">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Aplomb</title>
@@ -86,6 +86,31 @@ section { padding-block: 96px; }
 .hero .lead { font-size: 20px; max-width: 34ch; color: var(--muted); }
 .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .hero figure { margin: 0; }
+.hero-phone { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.hero-phone figcaption { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.phone { width: min(100%, 320px); background: #0E0E0D; border-radius: 44px; padding: 10px; box-shadow: 0 30px 60px -30px rgba(20,20,20,.45); transform: rotate(-3deg); }
+.screen { background: #F5F3EF; color: #141414; border-radius: 35px; padding: 34px 16px 20px; display: flex; flex-direction: column; gap: 12px; font-size: 12px; line-height: 1.3; }
+.ph-top { display: flex; justify-content: space-between; align-items: center; }
+.ph-x { width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 1px solid #E2DED7; display: grid; place-items: center; font-size: 18px; }
+.ph-title { display: grid; justify-items: center; }
+.ph-title small { color: #5A554E; font-size: 11px; }
+.ph-title b { font-family: var(--display); font-weight: 800; font-size: 18px; }
+.ph-lvl { background: #141414; color: #F5F3EF; font-weight: 600; padding: 6px 10px; border-radius: 12px; font-size: 11px; }
+.ph-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ph-stats div { background: #fff; border: 1px solid #E2DED7; border-radius: 12px; padding: 8px; display: grid; justify-items: center; }
+.ph-stats small { color: #5A554E; font-size: 10px; }
+.ph-stats b { font-family: var(--display); font-weight: 800; font-size: 17px; }
+.ph-field { background: #fff; border: 1px solid #E2DED7; border-radius: 20px; padding: 8px; }
+.ph-field svg { width: 100%; height: auto; display: block; }
+.ph-tip { background: #141414; color: #F5F3EF; border-radius: 14px; padding: 10px 12px; }
+.ph-bar div { display: flex; justify-content: space-between; color: #5A554E; margin-bottom: 6px; }
+.ph-bar b { color: #141414; }
+.ph-bar i { display: block; height: 8px; background: #E2DED7; border-radius: 4px; }
+.ph-bar em { display: block; height: 8px; background: #B8865B; border-radius: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .ph-ball { animation: roll 3.2s ease-in-out infinite alternate; }
+  @keyframes roll { from { transform: translate(0,0); } to { transform: translate(124px,-152px); } }
+}
 @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
 
 /* Problème */
@@ -134,6 +159,7 @@ section { padding-block: 96px; }
 .story { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
 .story h2 { font-size: clamp(34px, 4.6vw, 54px); }
 .story-text { display: grid; gap: 18px; font-size: 18px; max-width: 62ch; }
+.textlink { font-weight: 600; color: var(--wood-dark); text-underline-offset: 4px; }
 .chain { display: grid; gap: 0; margin-top: 8px; }
 .chain div { padding: 14px 0 14px 22px; border-left: 3px solid var(--wood); font-weight: 600; }
 .chain div:last-child { border-left-color: var(--fg); }
@@ -170,7 +196,8 @@ details p { margin-top: 10px; max-width: 70ch; }
       <a class="navlink" href="#probleme">Le problème</a>
       <a class="navlink" href="#produit">La planche</a>
       <a class="navlink" href="#appli">L'appli</a>
-      <a class="btn btn-wood" href="#testeur">Deviens testeur</a>
+      <a class="navlink" href="qui-suis-je.html">Qui suis-je</a>
+      <a class="btn btn-wood" href="#testeur">Participer au projet</a>
     </nav>
   </div>
 </header>
@@ -183,12 +210,19 @@ details p { margin-top: 10px; max-width: 70ch; }
         <h1>Des appuis solides, <em>sans s'ennuyer.</em></h1>
         <p class="lead">Proprioception, mobilité et renforcement du bas du corps. En sécurité, à ton niveau, en jouant.</p>
         <div class="actions">
-          <a class="btn btn-wood" href="#testeur">Deviens testeur</a>
+          <a class="btn btn-wood" href="#testeur">Participer au projet</a>
           <a class="btn btn-line" href="https://www.instagram.com/aplomb.sport/" target="_blank" rel="noopener">Suivre @aplomb.sport</a>
         </div>
       </div>
-      <figure>
-        <img src="assets/planche.png" width="1200" height="550" alt="La planche Aplomb : un plateau en bois retenu par des élastiques au-dessus d'une base">
+      <figure class="hero-phone" aria-label="Aperçu de l'appli Aplomb : le mini-jeu Cible">
+        <div class="phone"><div class="screen">
+          <div class="ph-top"><span class="ph-x" aria-hidden="true">×</span><div class="ph-title"><small>Mini-jeu</small><b>Cible</b></div><span class="ph-lvl">Niv. 4</span></div>
+          <div class="ph-stats"><div><small>Score</small><b>1 240</b></div><div><small>Temps</small><b>0:37</b></div><div><small>Cibles</small><b>7/10</b></div></div>
+          <div class="ph-field"><svg viewBox="0 0 326 326" aria-hidden="true"><rect width="326" height="326" rx="18" fill="#F5F3EF"/><path d="M0 81.5 H326 M0 163 H326 M0 244.5 H326 M81.5 0 V326 M163 0 V326 M244.5 0 V326" stroke="#E2DED7"/><circle cx="236" cy="92" r="46" fill="#E9DCCB"/><circle cx="236" cy="92" r="30" fill="#D9BE9C"/><circle cx="236" cy="92" r="14" fill="#8A5A33"/><path d="M120 232 Q150 180 196 130" fill="none" stroke="#B8865B" stroke-width="3" stroke-dasharray="3 9" stroke-linecap="round"/><circle class="ph-ball" cx="112" cy="244" r="17" fill="#141414"/><circle cx="66" cy="70" r="9" fill="none" stroke="#BDB7AE" stroke-width="2" stroke-dasharray="3 4"/><circle cx="268" cy="262" r="9" fill="none" stroke="#BDB7AE" stroke-width="2" stroke-dasharray="3 4"/></svg></div>
+          <div class="ph-tip">Incline la planche vers l'avant droit et tiens <b>2 s</b> dans la cible.</div>
+          <div class="ph-bar"><div><span>Précision</span><b>86 %</b></div><i><em style="width:86%"></em></i></div>
+        </div></div>
+        <figcaption>Tu pilotes le jeu avec tes appuis</figcaption>
       </figure>
     </div>
   </section>
@@ -268,21 +302,17 @@ details p { margin-top: 10px; max-width: 70ch; }
     </div>
   </section>
 
-  <section id="histoire">
+  <section id="pourquoi">
     <div class="wrap story">
       <div style="display:grid;gap:16px">
         <div class="eyebrow">Pourquoi Aplomb</div>
-        <h2>Né d'un 100 km de trop.</h2>
+        <h2>« Je devrais. »</h2>
       </div>
       <div class="story-text">
-        <p>Je suis Kilian, ingénieur du sport et ultra-traileur. Il y a un an, quelques jours avant un 100 km, je me blesse. Comme beaucoup, je faisais très peu de renforcement.</p>
-        <div class="chain">
-          <div>Tendinopathie du tibial antérieur</div>
-          <div>La foulée change, le corps compense</div>
-          <div>Syndrome de l'essuie-glace</div>
-          <div>100 km terminés. Le lendemain, impossible de marcher.</div>
-        </div>
-        <p>Puis des semaines de remise en forme sur une planche d'équilibre, sans objectif ni repère. Aplomb est né de là, avec une mission : aligner renforcement et plaisir.</p>
+        <p>C'est la réponse qui revient presque à chaque fois quand on demande à un cycliste, un coureur ou un traileur s'il fait du renfo. Tout le monde sait que c'est utile. Presque personne ne s'y tient.</p>
+        <p>Le problème n'est pas de savoir quoi faire. C'est d'avoir envie de le faire, séance après séance.</p>
+        <p>Aplomb part de là : une planche sécurisée, une difficulté qui suit ton niveau, et une appli qui transforme l'exercice en jeu. Pour passer de « je devrais » à « j'y retourne ».</p>
+        <p><a class="textlink" href="qui-suis-je.html">Qui est derrière Aplomb →</a></p>
       </div>
     </div>
   </section>
@@ -290,11 +320,11 @@ details p { margin-top: 10px; max-width: 70ch; }
   <section class="cta-band" id="testeur">
     <div class="wrap cta-grid">
       <div>
-        <h2>Le prototype est en test à Lyon.</h2>
-        <p>Coureur, traileur, coach, kiné ou préparateur physique ? Teste Aplomb et aide-nous à le construire.</p>
+        <h2>Aplomb est en cours de développement.</h2>
+        <p>Coureur, traileur, cycliste, coach ou kiné ? Donne ton avis en 3 minutes et aide-nous à le construire.</p>
       </div>
       <div class="contact-box">
-        <a class="btn btn-wood" href="https://docs.google.com/forms/d/e/1FAIpQLSdX7hh4hPRhwmiP9ShIh6MxRAAc-g3JyKtBzhUigd1LzfCn5Q/viewform" target="_blank" rel="noopener">Je veux tester Aplomb</a>
+        <a class="btn btn-wood" href="https://docs.google.com/forms/d/e/1FAIpQLSdX7hh4hPRhwmiP9ShIh6MxRAAc-g3JyKtBzhUigd1LzfCn5Q/viewform" target="_blank" rel="noopener">Répondre au questionnaire</a>
         <div class="contact-line"><small>E-mail</small><a href="mailto:contact@aplomb-sport.fr">contact@aplomb-sport.fr</a></div>
         <div class="contact-line"><small>Instagram</small><a href="https://www.instagram.com/aplomb.sport/" target="_blank" rel="noopener">@aplomb.sport</a></div>
         <div class="contact-line"><small>Téléphone</small><span>07 82 32 37 70</span></div>
